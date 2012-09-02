@@ -202,7 +202,7 @@ void increaseClock( TIMESETPHASE timesetphase )
 	}
 	
 	rtc.dow = calcDOW();
-	save_clock();
+	//save_clock();
 }		
 
 void decreaseClock( TIMESETPHASE timesetphase )
@@ -262,7 +262,7 @@ void decreaseClock( TIMESETPHASE timesetphase )
 	}
 	
 	rtc.dow = calcDOW();
-	save_clock();
+	//save_clock();
 }
 	
 void tick( void )

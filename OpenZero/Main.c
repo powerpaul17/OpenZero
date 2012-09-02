@@ -60,7 +60,7 @@ int main(void)
 	
 	while (1)
 	{
-		if( adcTemp < targetTemp && valvestate != VALVE_OPEN )
+		if( (adcTemp + offsetTemp) < targetTemp && valvestate != VALVE_OPEN )
 		{
 			openValve();
 		}
@@ -124,6 +124,10 @@ int main(void)
 							timesetphase = TIMESET_YEAR;
 							break;
 							
+						case OFFSET :
+							runstate = OFFSETSET_STATE;
+							break;
+
 						default:
 							break;
 					}
@@ -153,7 +157,8 @@ int main(void)
 							break;
 						
 						case TIMESET_MINUTES :
-							timesetphase = TIMESET_YEAR;
+							//save_clock();
+							runstate = MENU_STATE;
 							break;
 								
 						default :
@@ -161,6 +166,10 @@ int main(void)
 					}
 					break;
 													
+				case OFFSETSET_STATE :
+					runstate = MENU_STATE;
+					break;
+
 				default :
 					break;
 			}
@@ -189,6 +198,11 @@ int main(void)
 					else
 						targetTemp += 5;
 					break;
+
+				case OFFSETSET_STATE :
+					if( offsetTemp < 10 )
+						offsetTemp++;
+					break;
 				
 				default :
 					break;
@@ -215,6 +229,11 @@ int main(void)
 						targetTemp = MAXTEMP;
 					else
 						targetTemp -= 5;
+					break;
+
+				case OFFSETSET_STATE :
+					if( offsetTemp > -10 )
+						offsetTemp--;
 					break;
 				
 				default :
@@ -259,6 +278,10 @@ ISR(LCD_vect)
 				LCD_writeText((unsigned char *)"TIME");
 				break;
 				
+				case OFFSET :
+				LCD_writeText((unsigned char *)"OFFSET");
+				break;
+
 				default :
 				LCD_writeText((unsigned char *)"MENU");
 				break;
@@ -296,6 +319,10 @@ ISR(LCD_vect)
 			}			
 			break;
 			
+		case OFFSETSET_STATE :
+			LCD_showTemp( offsetTemp );
+			break;
+
 		case PROBING_STATE :
 			switch( probingphase )
 			{

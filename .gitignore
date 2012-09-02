@@ -27,3 +27,10 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
+
+#ignore OS X files
+.DS_Store
+#ignore Eclipse files
+.project
+.cproject
+.settings

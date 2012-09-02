@@ -17,6 +17,7 @@
 #include <avr/sleep.h>
 
 extern unsigned int targetTemp;
+extern signed int offsetTemp;
 
 void initTemp( void );
 unsigned char findNTCTemp( unsigned int r );

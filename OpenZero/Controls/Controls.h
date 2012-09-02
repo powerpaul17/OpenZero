@@ -21,6 +21,7 @@
 typedef enum {
 	TEMP,
 	TIME,
+	OFFSET,
 	ADCVAL,
 	LAST_ITEM								// this is just here to be able to wrap around, do not actually use it
 } MAINMENU;
