@@ -11,6 +11,7 @@ typedef enum {
 	PROBING_STATE,
 	TIMESET_STATE,
 	TEMPSET_STATE,
+	PROGRAM_STATE,
 	OFFSETSET_STATE
 } RUNSTATE;
 	
@@ -35,8 +36,15 @@ typedef enum {
 	PROBING_END
 } PROBINGPHASE;
 
+typedef enum {
+	PROGRAM_UNKNOWN,
+	PROGRAM_SELECTWEEKDAY,
+	PROGRAM_END
+} PROGRAMPHASE;
+
 extern volatile RUNSTATE runstate;	
 extern volatile TIMESETPHASE timesetphase;
 extern volatile PROBINGPHASE probingphase;
+extern volatile PROGRAMPHASE programphase;
 
 #endif

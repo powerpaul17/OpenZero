@@ -7,6 +7,7 @@
 #include "Temp.h"
 
 unsigned int targetTemp = 200;
+signed int offsetTemp = 0;
 
 void initTemp( void )
 {

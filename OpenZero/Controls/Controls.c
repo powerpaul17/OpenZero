@@ -4,6 +4,7 @@
  * Created: 3-3-2012 18:11:20
  *  Author: Willem
  */ 
+#include <avr/io.h>
 #include "Controls.h"
 
 unsigned char previousRotaryState = 0;
@@ -17,9 +18,9 @@ void initControls( void )
 	PORTB |= (1<<PB6);				// PINB6 = "OK" button
 	PORTB |= (1<<PB7);				// PINB7 = "-" button on wheel
 	
-// Why can I not get PCINT1_vector to work???
-//	EIMSK |= (1<<PCIE1);				// Enable interrupt-on-change interrupts for PCINT8-PCINT15 which includes the push buttons
-//	PCMSK1 |= (1<<PCINT8)|(1<<PCINT12)|(1<<PCINT13)|(1<<PCINT14)|(1<<PCINT15);
+	// TODO: ?? Why can I not get PCINT1_vector to work???
+	EIMSK |= (1<<PCIE1);				// Enable interrupt-on-change interrupts for PCINT8-PCINT15 which includes the push buttons
+	PCMSK1 |= (1<<PCINT8)|(1<<PCINT12)|(1<<PCINT13)|(1<<PCINT14)|(1<<PCINT15);
 }
 
 ROTARYBUTTON readRotaryButton( void )

@@ -15,7 +15,11 @@
  * minute, and the 8th LED represents the hour.
  *
  ******************************************************************************************/ 
+#include <avr/io.h>
+#include <avr/eeprom.h>
+
 #include "Rtc.h"
+#include "Temp.h"
 
 // these EEMEM variable declarations are just used as 'labels' into the EEPROM space
 // we do not have to keep track ourselves where certain values are stored, note: seconds are not stored
@@ -269,6 +273,12 @@ void tick( void )
 {
 	rtc.second++;
 	update_clock();
+
+	// monitor temperature every minute
+	if (rtc.second == 0) {
+		NTC_SENSOR_ON;
+		ADCSRA |= (1<<ADSC);							// start conversion
+	}
 }        
  
 ISR(TIMER2_OVF_vect)

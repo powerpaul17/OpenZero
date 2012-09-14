@@ -4,6 +4,8 @@
  * Created: 3-3-2012 14:05:45
  *  Author: Willem
  */ 
+#include <avr/io.h>
+#include <avr/sleep.h>
 #include "Valve.h"
 
 volatile VALVESTATE valvestate = VALVE_UNKNOWN;
